@@ -14,7 +14,10 @@
 // durationBetweenDates('31 Jan 2022', '03 Feb 2021', 'days')  // поверне '362 days'
 //==========================================================================================
 
-function durationBetweenDates(strOne, strTwo, preset) {
+function durationBetweenDates(
+	strOne = '1 Jan 1992',
+	strTwo = '20 Oct 1992',
+	preset = 'hours') {
 
 	const dateOne = new Date(strOne)
 	const dateTwo = new Date(strTwo)
@@ -22,18 +25,20 @@ function durationBetweenDates(strOne, strTwo, preset) {
 	if (isNaN(dateOne - dateTwo)) {
 		return `Invalid date inputs (1 or 2 args)!`
 	} else if (preset === 'days') {
-		return ` ${Math.abs((dateOne - dateTwo) / 1000 / 60 / 60 / 24)} ${(Math.abs((dateOne - dateTwo) / 1000 / 60 / 60 / 24)) > 1 ? "days" : "day"}`
+		return ` ${Math.abs((dateOne - dateTwo) / 1000 / 60 / 60 / 24).toFixed(2)} ${(Math.abs((dateOne - dateTwo) / 1000 / 60 / 60 / 24)) > 1 ? "days" : "day"}`
 	} else if (preset === 'hours') {
-		return ` ${Math.abs((dateOne - dateTwo) / 1000 / 60 / 60)} ${(Math.abs((dateOne - dateTwo) / 1000 / 60 / 60)) > 1 ? "hours" : "hour"}`
+		return ` ${Math.abs((dateOne - dateTwo) / 1000 / 60 / 60).toFixed(2)} ${(Math.abs((dateOne - dateTwo) / 1000 / 60 / 60)) > 1 ? "hours" : "hour"}`
 	} else if (preset === 'minutes') {
-		return ` ${Math.abs((dateOne - dateTwo) / 1000 / 60)} ${(Math.abs((dateOne - dateTwo) / 1000 / 60)) > 1 ? "minutes" : "minute"
+		return ` ${Math.abs((dateOne - dateTwo) / 1000 / 60).toFixed(2)} ${(Math.abs((dateOne - dateTwo) / 1000 / 60)) > 1 ? "minutes" : "minute"
 			}`
 	} else if (preset === 'seconds') {
-		return ` ${Math.abs((dateOne - dateTwo) / 1000)} ${(Math.abs((dateOne - dateTwo) / 1000)) > 1 ? "seconds" : "second"}`
+		return ` ${Math.abs((dateOne - dateTwo) / 1000).toFixed(2)} ${(Math.abs((dateOne - dateTwo) / 1000)) > 1 ? "seconds" : "second"}`
 	} else {
 		return `Invalid preset (3arg)!`
 	}
 }
-console.log(durationBetweenDates('2 Feb 2025', '1 Feb 2025', 'months'))
+
+console.log(durationBetweenDates('02 Aug 1985', '03 Aug 1985', 'seconds'))
+console.log(durationBetweenDates('31 Jan 2022', '03 Feb 2021', 'days'))
 
 //========================================================================================================================================================
