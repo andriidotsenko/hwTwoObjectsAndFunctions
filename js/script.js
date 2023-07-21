@@ -36,17 +36,17 @@ function durationBetweenDates(
 console.log(durationBetweenDates('02 Aug 1985 12:25:56:200', '03 Aug 1985', 'seconds'))
 console.log(durationBetweenDates('31 Jan 2022 12:25:56:268', '03 Feb 2021', 'days'))
 //========================================================================================================================================================
+
 // 2. Задача про перетворення об'єкту
 // Допустимо у вас є об'єкт, у якому кожен ключ - це назва товару (одинм словом), а значення - його ціна.
 // Напишіть функцію яка буде всі ключі переводити у нижній регістр, а всі ціни буде заокруглювати до двох знаків після коми.
 //========================================================================================================================================================
-
 const priceData = {
 	Apples: '23.4',
 	BANANAS: '48',
 	oRAngGEs: '48.7584',
 	Test: '2222e-2',
-	TeST2: 130.999,
+	TeST2: -130.999,
 };
 
 function optimizer(data) {
@@ -61,16 +61,15 @@ function optimizer(data) {
 
 let updatedPriceData = optimizer(priceData)
 console.log(updatedPriceData) // {apples: '23.40', bananas: '48.00', oranges: '48.76'}
-
 //========================================================================================================================================================
+
 // 3. Задача про рекурсію
 // Напишіть функцію яка рекурсивно буде знаходити суму 
 // всіх непарних додатніх чисел до якогось числа.
 //========================================================================================================================================================
-
 function recursiveOddSumTo(number) {
-	if (number <= 0 || number > 10000) { //Ліміт, щоб не перегружати кількістю ітерацій
-		return 0;
+	if (number <= 0 || number > 10000) { //Limit so as not to overload with the number of iterations
+		return 0
 	} else if (number % 2 !== 0) {
 		return number + recursiveOddSumTo(number - 1);
 	} else {
@@ -78,22 +77,30 @@ function recursiveOddSumTo(number) {
 	}
 }
 
-console.log(iterativeOddSumTo(1)) // 1
-console.log(iterativeOddSumTo(10)) // 25
-console.log(recursiveOddSumTo(43)) // 484
+console.log(recursiveOddSumTo(1)) // 1
+console.log(recursiveOddSumTo(10)) // 25
 console.log(recursiveOddSumTo(20000)) // 0 
 //========================================================================================================================================================
+
 // 4. Напишіть функцію яка ітеративно (в циклі) буде знаходити
 // суму всіх непарних додатніх чисел до якогось числа.
 //========================================================================================================================================================
 
 function iterativeOddSumTo(number) {
-
-	// тут ваш код
-
-};
+	let sumValue = 0
+	for (let i = 1; i <= number; i++) {
+		if (number <= 0) {
+		} else if (i % 2 !== 0) {
+			sumValue += i
+		}
+	}
+	return sumValue
+}
 
 console.log(iterativeOddSumTo(1)) // 1
 console.log(iterativeOddSumTo(10)) // 25
+console.log(iterativeOddSumTo(20000)) // 100000000 
+// (Not 0, because there is no "number > 10000" check as in "recursiveOddSumTo")
+
 
 
