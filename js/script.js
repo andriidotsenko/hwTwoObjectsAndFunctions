@@ -8,10 +8,6 @@
 // Функція повертатиме часовий період між цими датами згідно розмірності.
 // Також вкажіть значення по замовчуванню для всіх цих параметрів (на ваш вибір).
 // Функція має коректно працювати навіть якщо початкова дата пізніше ніж кінцева дата.
-
-// Приклади:
-// durationBetweenDates('02 Aug 1985', '03 Aug 1985', 'seconds')  // поверне '86400 seconds'
-// durationBetweenDates('31 Jan 2022', '03 Feb 2021', 'days')  // поверне '362 days'
 //==========================================================================================
 
 function durationBetweenDates(
@@ -29,16 +25,75 @@ function durationBetweenDates(
 	} else if (preset === 'hours') {
 		return ` ${Math.abs((dateOne - dateTwo) / 1000 / 60 / 60).toFixed(2)} ${(Math.abs((dateOne - dateTwo) / 1000 / 60 / 60)) > 1 ? "hours" : "hour"}`
 	} else if (preset === 'minutes') {
-		return ` ${Math.abs((dateOne - dateTwo) / 1000 / 60).toFixed(2)} ${(Math.abs((dateOne - dateTwo) / 1000 / 60)) > 1 ? "minutes" : "minute"
-			}`
+		return ` ${Math.abs((dateOne - dateTwo) / 1000 / 60).toFixed(2)} ${(Math.abs((dateOne - dateTwo) / 1000 / 60)) > 1 ? "minutes" : "minute"}`
 	} else if (preset === 'seconds') {
 		return ` ${Math.abs((dateOne - dateTwo) / 1000).toFixed(2)} ${(Math.abs((dateOne - dateTwo) / 1000)) > 1 ? "seconds" : "second"}`
 	} else {
-		return `Invalid preset (3arg)!`
+		return `Invalid preset (arg 3)!`
 	}
 }
 
-console.log(durationBetweenDates('02 Aug 1985', '03 Aug 1985', 'seconds'))
-console.log(durationBetweenDates('31 Jan 2022', '03 Feb 2021', 'days'))
+console.log(durationBetweenDates('02 Aug 1985 12:25:56:200', '03 Aug 1985', 'seconds'))
+console.log(durationBetweenDates('31 Jan 2022 12:25:56:268', '03 Feb 2021', 'days'))
+//========================================================================================================================================================
+// 2. Задача про перетворення об'єкту
+// Допустимо у вас є об'єкт, у якому кожен ключ - це назва товару (одинм словом), а значення - його ціна.
+// Напишіть функцію яка буде всі ключі переводити у нижній регістр, а всі ціни буде заокруглювати до двох знаків після коми.
+//========================================================================================================================================================
+
+const priceData = {
+	Apples: '23.4',
+	BANANAS: '48',
+	oRAngGEs: '48.7584',
+	Test: '2222e-2',
+	TeST2: 130.999,
+};
+
+function optimizer(data) {
+	let entriesArr = Object.entries(data)
+	for (let i in entriesArr) {
+		let arr = entriesArr[i]
+		arr[0] = (arr[0]).toLowerCase()
+		arr[1] = (+arr[1]).toFixed(2)
+	}
+	return Object.fromEntries(entriesArr)
+}
+
+let updatedPriceData = optimizer(priceData)
+console.log(updatedPriceData) // {apples: '23.40', bananas: '48.00', oranges: '48.76'}
 
 //========================================================================================================================================================
+// 3. Задача про рекурсію
+// Напишіть функцію яка рекурсивно буде знаходити суму 
+// всіх непарних додатніх чисел до якогось числа.
+//========================================================================================================================================================
+
+function recursiveOddSumTo(number) {
+	if (number <= 0 || number > 10000) { //Ліміт, щоб не перегружати кількістю ітерацій
+		return 0;
+	} else if (number % 2 !== 0) {
+		return number + recursiveOddSumTo(number - 1);
+	} else {
+		return recursiveOddSumTo(number - 1);
+	}
+}
+
+console.log(iterativeOddSumTo(1)) // 1
+console.log(iterativeOddSumTo(10)) // 25
+console.log(recursiveOddSumTo(43)) // 484
+console.log(recursiveOddSumTo(20000)) // 0 
+//========================================================================================================================================================
+// 4. Напишіть функцію яка ітеративно (в циклі) буде знаходити
+// суму всіх непарних додатніх чисел до якогось числа.
+//========================================================================================================================================================
+
+function iterativeOddSumTo(number) {
+
+	// тут ваш код
+
+};
+
+console.log(iterativeOddSumTo(1)) // 1
+console.log(iterativeOddSumTo(10)) // 25
+
+
