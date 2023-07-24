@@ -26,13 +26,13 @@ function durationBetweenDates(
 	if (isNaN(dateOne - dateTwo)) {
 		return `Invalid date inputs (1 or 2 args)!`
 	} else if (preset === 'days') {
-		return ` ${valueDays} ${valueDays => 2 ? "days" : "day"}`
+		return ` ${valueDays} day${valueDays >= 2 ? "s" : ""}`
 	} else if (preset === 'hours') {
-		return ` ${valueHours} ${valueHours => 2 ? "hours" : "hour"}`
+		return ` ${valueHours} hour${valueHours >= 2 ? "s" : ""}`
 	} else if (preset === 'minutes') {
-		return ` ${valueMinutes} ${valueMinutes => 2 ? "minutes" : "minute"}`
+		return ` ${valueMinutes} ${valueMinutes >= 2 ? "s" : ""}`
 	} else if (preset === 'seconds') {
-		return ` ${valueSeconds} ${valueSeconds => 2 ? "seconds" : "second"}`
+		return ` ${valueSeconds} second${valueSeconds >= 2 ? "s" : ""}`
 	} else {
 		return `Invalid preset (arg 3)!`
 	}
@@ -40,6 +40,33 @@ function durationBetweenDates(
 
 console.log(durationBetweenDates('02 Aug 1985 12:25:56:200', '02 Aug 1985', 'seconds'))
 console.log(durationBetweenDates('31 Jan 2022 12:25:56:268', '03 Feb 2021', 'days'))
+
+
+//========================================================================================================================================================
+// the second version of the decision
+
+function durationBetweenDates2(strOne = '1 Jan 1992', strTwo = '20 Oct 1992', preset = 'hours') {
+	const dateOne = new Date(strOne);
+	const dateTwo = new Date(strTwo);
+	const diffInSeconds = Math.abs(dateOne - dateTwo) / 1000;
+
+	if (isNaN(diffInSeconds)) {
+		return `Invalid date inputs (1 or 2 args)!`;
+	}
+
+	const presets = {
+		days: 24 * 60 * 60,
+		hours: 60 * 60,
+		minutes: 60,
+		seconds: 1
+	};
+
+	const value = (diffInSeconds / presets[preset]).toFixed(2);
+	return ` ${value} ${preset}`;
+}
+
+console.log(durationBetweenDates2('02 Aug 1985 12:25:56:200', '02 Aug 1985', 'minutes'))
+console.log(durationBetweenDates2('31 Jan 2022 12:25:56:268', '03 Feb 2021', 'days'))
 //========================================================================================================================================================
 
 // 2. Задача про перетворення об'єкту
