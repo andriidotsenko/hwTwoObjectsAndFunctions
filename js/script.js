@@ -18,22 +18,27 @@ function durationBetweenDates(
 	const dateOne = new Date(strOne)
 	const dateTwo = new Date(strTwo)
 
+	const valueDays = Math.abs((dateOne - dateTwo) / 1000 / 60 / 60 / 24).toFixed(2)
+	const valueHours = Math.abs((dateOne - dateTwo) / 1000 / 60 / 60).toFixed(2)
+	const valueMinutes = Math.abs((dateOne - dateTwo) / 1000 / 60).toFixed(2)
+	const valueSeconds = Math.abs((dateOne - dateTwo) / 1000).toFixed(2)
+
 	if (isNaN(dateOne - dateTwo)) {
 		return `Invalid date inputs (1 or 2 args)!`
 	} else if (preset === 'days') {
-		return ` ${Math.abs((dateOne - dateTwo) / 1000 / 60 / 60 / 24).toFixed(2)} ${(Math.abs((dateOne - dateTwo) / 1000 / 60 / 60 / 24)) > 1 ? "days" : "day"}`
+		return ` ${valueDays} ${valueDays => 2 ? "days" : "day"}`
 	} else if (preset === 'hours') {
-		return ` ${Math.abs((dateOne - dateTwo) / 1000 / 60 / 60).toFixed(2)} ${(Math.abs((dateOne - dateTwo) / 1000 / 60 / 60)) > 1 ? "hours" : "hour"}`
+		return ` ${valueHours} ${valueHours => 2 ? "hours" : "hour"}`
 	} else if (preset === 'minutes') {
-		return ` ${Math.abs((dateOne - dateTwo) / 1000 / 60).toFixed(2)} ${(Math.abs((dateOne - dateTwo) / 1000 / 60)) > 1 ? "minutes" : "minute"}`
+		return ` ${valueMinutes} ${valueMinutes => 2 ? "minutes" : "minute"}`
 	} else if (preset === 'seconds') {
-		return ` ${Math.abs((dateOne - dateTwo) / 1000).toFixed(2)} ${(Math.abs((dateOne - dateTwo) / 1000)) > 1 ? "seconds" : "second"}`
+		return ` ${valueSeconds} ${valueSeconds => 2 ? "seconds" : "second"}`
 	} else {
 		return `Invalid preset (arg 3)!`
 	}
 }
 
-console.log(durationBetweenDates('02 Aug 1985 12:25:56:200', '03 Aug 1985', 'seconds'))
+console.log(durationBetweenDates('02 Aug 1985 12:25:56:200', '02 Aug 1985', 'seconds'))
 console.log(durationBetweenDates('31 Jan 2022 12:25:56:268', '03 Feb 2021', 'days'))
 //========================================================================================================================================================
 
